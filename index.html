@@ -63,7 +63,7 @@
         <div id="mySidebar" class="sidebar">
             <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
             <h1 class="py-4 mx-4 text-2xl text-gray-300 transition duration-300">My favorite advices</h1>
-            <div v-for="id in favorites" class="m-4 p-3 rounded-xl text-center text-xl text-gray-600 justify-center" :class="'bg-'+getRandomColor()+'-100'">
+            <div v-for="id in favorites" class="m-3 p-3 rounded-xl text-center text-xl text-gray-600 justify-center" :class="'bg-'+getRandomColor()+'-100'">
                 <p>{{ this.getAdviceById(id).text }}</p>
             </div>
         </div>
