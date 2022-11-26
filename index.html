@@ -8,43 +8,84 @@
 </head>
 <body class="flex justify-center bg-gray-300">
     <div v-cloak id="app" class="flex flex-col w-full">
-        <div class="flex justify-center">
-            <div @click="generateAdvice()" class="my-2 p-3 rounded-xl" :class="'bg-'+button_color+'-100'">
-                <div>
-                    <p class="text-gray-600 text-xl font-medium">Get new advice!</p>
+        <div class="blur-div">
+            <div class="flex justify-center">
+                <div @click="generateAdvice()" class="my-4 mx-2 p-3 rounded-xl" :class="'bg-'+button_color+'-100'">
+                    <div>
+                        <p class="text-gray-600 text-xl font-medium">Get new advice!</p>
+                    </div>
+                </div>
+                <div onclick="openNav()" class="my-4 mx-2 p-3 rounded-xl" :class="'bg-'+button_color+'-100'">
+                    <div>
+                        <p class="text-gray-600 text-xl font-medium">See favorites</p>
+                    </div>
+                </div>
+            </div>
+            <div class="flex flex-col w-full justify-center">
+                <div v-for="(advice, key) in advices" class="advice flex justify-center items-center w-full">
+                    <div class="flex basis-0 grow w-full justify-end">
+                        <div class="flex">
+                            <div class="flex-col">
+                                <div @click="changeAdviceColor(key, 'green')" class="h-6 w-6 rounded-lg mb-1 bg-green-100 border-2" :class="advice.color=='green' ? 'border-gray-400' : 'border-gray-100'"></div>
+                                <div @click="changeAdviceColor(key, 'blue')" class="h-6 w-6 rounded-lg bg-blue-100 border-2" :class="advice.color=='blue' ? 'border-gray-400' : 'border-gray-100'"></div>
+                            </div>
+                            <div class="flex-col">
+                                <div @click="changeAdviceColor(key, 'red')" class="h-6 w-6 rounded-lg mb-1 ml-1 bg-red-100 border-2" :class="advice.color=='red' ? 'border-gray-400' : 'border-gray-100'"></div>
+                                <div @click="changeAdviceColor(key, 'yellow')" class="h-6 w-6 ml-1 rounded-lg bg-yellow-100 border-2" :class="advice.color=='yellow' ? 'border-gray-400' : 'border-gray-100'"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flex basis-96 grow w-full max-w-2xl">
+                        <div class="w-full m-2 mt-0 p-3 rounded-xl text-center text-xl text-gray-600 justify-center" :class="'bg-'+advice.color+'-100'">
+                            <p>{{ advice.text }}</p>
+                        </div>
+                    </div>
+                    <div class="flex basis-0 grow w-full justify-start">
+                        <div class="flex justify-center items-center">
+                            <div @click="toggleFavorite(advice.id)" class="hover:bg-yellow-100 hover:rounded-xl">
+                                <div v-if="this.favorites.includes(advice.id)" class="w-6 m-2 fill-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M316.9 18C311.6 7 300.4 0 288.1 0s-23.4 7-28.8 18L195 150.3 51.4 171.5c-12 1.8-22 10.2-25.7 21.7s-.7 24.2 7.9 32.7L137.8 329 113.2 474.7c-2 12 3 24.2 12.9 31.3s23 8 33.8 2.3l128.3-68.5 128.3 68.5c10.8 5.7 23.9 4.9 33.8-2.3s14.9-19.3 12.9-31.3L438.5 329 542.7 225.9c8.6-8.5 11.7-21.2 7.9-32.7s-13.7-19.9-25.7-21.7L381.2 150.3 316.9 18z"/></svg>
+                                </div>
+                                <div v-else class="w-6 m-2 fill-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M287.9 0C297.1 0 305.5 5.25 309.5 13.52L378.1 154.8L531.4 177.5C540.4 178.8 547.8 185.1 550.7 193.7C553.5 202.4 551.2 211.9 544.8 218.2L433.6 328.4L459.9 483.9C461.4 492.9 457.7 502.1 450.2 507.4C442.8 512.7 432.1 513.4 424.9 509.1L287.9 435.9L150.1 509.1C142.9 513.4 133.1 512.7 125.6 507.4C118.2 502.1 114.5 492.9 115.1 483.9L142.2 328.4L31.11 218.2C24.65 211.9 22.36 202.4 25.2 193.7C28.03 185.1 35.5 178.8 44.49 177.5L197.7 154.8L266.3 13.52C270.4 5.249 278.7 0 287.9 0L287.9 0zM287.9 78.95L235.4 187.2C231.9 194.3 225.1 199.3 217.3 200.5L98.98 217.9L184.9 303C190.4 308.5 192.9 316.4 191.6 324.1L171.4 443.7L276.6 387.5C283.7 383.7 292.2 383.7 299.2 387.5L404.4 443.7L384.2 324.1C382.9 316.4 385.5 308.5 391 303L476.9 217.9L358.6 200.5C350.7 199.3 343.9 194.3 340.5 187.2L287.9 78.95z"/></svg>
+                                </div>
+                            </div>  
+                            <div @click="deleteAdvice(key)" class="hover:bg-red-200 hover:rounded-xl">
+                                <div class="w-4 m-2 fill-gray-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M160 400C160 408.8 152.8 416 144 416C135.2 416 128 408.8 128 400V192C128 183.2 135.2 176 144 176C152.8 176 160 183.2 160 192V400zM240 400C240 408.8 232.8 416 224 416C215.2 416 208 408.8 208 400V192C208 183.2 215.2 176 224 176C232.8 176 240 183.2 240 192V400zM320 400C320 408.8 312.8 416 304 416C295.2 416 288 408.8 288 400V192C288 183.2 295.2 176 304 176C312.8 176 320 183.2 320 192V400zM317.5 24.94L354.2 80H424C437.3 80 448 90.75 448 104C448 117.3 437.3 128 424 128H416V432C416 476.2 380.2 512 336 512H112C67.82 512 32 476.2 32 432V128H24C10.75 128 0 117.3 0 104C0 90.75 10.75 80 24 80H93.82L130.5 24.94C140.9 9.357 158.4 0 177.1 0H270.9C289.6 0 307.1 9.358 317.5 24.94H317.5zM151.5 80H296.5L277.5 51.56C276 49.34 273.5 48 270.9 48H177.1C174.5 48 171.1 49.34 170.5 51.56L151.5 80zM80 432C80 449.7 94.33 464 112 464H336C353.7 464 368 449.7 368 432V128H80V432z"/></svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="flex flex-col w-full justify-center">
-            <div v-for="(advice, key) in advices" class="advice flex justify-center items-center w-full">
-                <div class="flex basis-0 grow w-full justify-end">
-                    <div class="flex">
-                        <div class="flex-col">
-                            <div @click="changeAdviceColor(key, 'green')" class="h-6 w-6 rounded-lg mb-1 bg-green-100 border-2" :class="advice.color=='green' ? 'border-gray-400' : 'border-gray-100'"></div>
-                            <div @click="changeAdviceColor(key, 'blue')" class="h-6 w-6 rounded-lg bg-blue-100 border-2" :class="advice.color=='blue' ? 'border-gray-400' : 'border-gray-100'"></div>
-                        </div>
-                        <div class="flex-col">
-                            <div @click="changeAdviceColor(key, 'red')" class="h-6 w-6 rounded-lg mb-1 ml-1 bg-red-100 border-2" :class="advice.color=='red' ? 'border-gray-400' : 'border-gray-100'"></div>
-                            <div @click="changeAdviceColor(key, 'yellow')" class="h-6 w-6 ml-1 rounded-lg bg-yellow-100 border-2" :class="advice.color=='yellow' ? 'border-gray-400' : 'border-gray-100'"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex basis-96 grow w-full max-w-2xl">
-                    <div class="w-full m-2 p-3 rounded-xl text-center text-xl text-gray-600 justify-center" :class="'bg-'+advice.color+'-100'">
-                        <p>{{ advice.text }}</p>
-                    </div>
-                </div>
-                <div class="flex basis-0 grow w-full justify-start">
-                    <div @click="deleteAdvice(key)" class="w-4 m-2 fill-gray-500">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z"/></svg>
-                    </div>
-                </div>
+        <div id="mySidebar" class="sidebar">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+            <h1 class="py-4 mx-4 text-2xl text-gray-300 transition duration-300">My favorite advices</h1>
+            <div v-for="id in favorites" class="m-4 p-3 rounded-xl text-center text-xl text-gray-600 justify-center" :class="'bg-'+getRandomColor()+'-100'">
+                <p>{{ this.getAdviceById(id).text }}</p>
             </div>
         </div>
     </div> 
+    
 </body>
 
 <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
+<script>
+    function openNav() {
+      document.querySelector(".blur-div").classList.add("blur-md");
+      document.getElementById("mySidebar").style.width = "600px";
+      document.getElementById("main").style.marginLeft = "600px";
+    }
+    
+    function closeNav() {
+      document.querySelector(".blur-div").classList.remove("blur-md");
+      document.getElementById("mySidebar").style.width = "0";
+      document.getElementById("main").style.marginLeft= "0";
+    }
+</script>
 
 <script>
   const { createApp } = Vue
@@ -55,7 +96,8 @@
         message: 'Hello Vue!',
         advices: [],
         colors: ['green', 'blue', 'red', 'yellow'],
-        button_color: ''
+        button_color: '',
+        favorites: [],
       }
     },
     mounted() {
@@ -84,7 +126,52 @@
         changeAdviceColor(key, color){
             this.advices[key].color = color;
         },
+        addFavorite(id){
+            this.favorites.push(id);
+        },
+        removeFavorite(id){
+            this.favorites.splice(this.favorites.indexOf(id), 1);
+        },
+        toggleFavorite(id){
+            if(this.favorites.includes(id)){
+                this.removeFavorite(id);
+            }else{
+                this.addFavorite(id);
+            }
+        },
+        getAdviceById(id){
+            return this.advices.find(advice => advice.id == id);
+        },
+        getRandomColor(){
+            return this.colors[Math.floor(Math.random()*this.colors.length)];
+        }
     }
   }).mount('#app')
 </script>
 </html>
+
+<style>
+ .sidebar {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.sidebar a:hover {
+  color: #f1f1f1;
+}
+
+.sidebar .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
+</style>

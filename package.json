@@ -1,0 +1,23 @@
+{
+  "name": "sweet-advices",
+  "version": "1.0.0",
+  "description": "Get advices for your life!",
+  "main": "tailwind.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vapdev/sweet-advices.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vapdev/sweet-advices/issues"
+  },
+  "homepage": "https://github.com/vapdev/sweet-advices#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
