@@ -150,12 +150,10 @@
                 this.favorites.push(id);
             },
             removeFavorite(id) {
-                advice = this.getAdviceById(id);
-                this.favorites.splice(this.favorites.indexOf(advice), 1);
+                this.favorites.splice(this.favorites.indexOf(id), 1);
             },
             toggleFavorite(id) {
-                advice = this.getAdviceById(id);
-                if (this.favorites.includes(advice)) {
+                if (this.favorites.includes(id)) {
                     this.removeFavorite(id);
                 } else {
                     this.addFavorite(id);
