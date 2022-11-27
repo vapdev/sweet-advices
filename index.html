@@ -143,6 +143,9 @@
                 this.button_color = this.colors[Math.floor(Math.random() * this.colors.length)];
             },
             deleteAdvice(key) {
+                if (this.favorites.includes(this.advices[key].id)) {
+                    this.favorites.splice(this.favorites.indexOf(this.advices[key].id), 1);
+                }
                 this.advices.splice(key, 1);
             },
             changeAdviceColor(key, color) {
