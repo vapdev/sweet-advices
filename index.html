@@ -130,13 +130,17 @@
                 fetch("https://api.adviceslip.com/advice?t='" + Math.random())
                     .then(response => response.json())
                     .then(data => {
-                        random_color = this.colors[Math.floor(Math.random() * this.colors.length)];
-                        this.advices.unshift({
-                            'id': data.slip.id,
-                            'text': data.slip.advice,
-                            'color': this.button_color,
-                        });
-                        this.changeButtonColor();
+                        if (this.checkAdviceAlreadyExists(data.slip.id)) {
+                            this.generateAdvice()
+                        } else {
+                            random_color = this.colors[Math.floor(Math.random() * this.colors.length)];
+                            this.advices.unshift({
+                                'id': data.slip.id,
+                                'text': data.slip.advice,
+                                'color': this.button_color,
+                            });
+                            this.changeButtonColor();
+                        }
                     });
             },
             changeButtonColor() {
@@ -169,6 +173,9 @@
             },
             getRandomColor() {
                 return this.colors[Math.floor(Math.random() * this.colors.length)];
+            },
+            checkAdviceAlreadyExists(id) {
+                return this.advices.find(advice => advice.id == id);
             }
         }
     }).mount('#app')
