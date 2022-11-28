@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <div class="flex basis-0 grow w-full justify-start">
-                        <div class="flex justify-center items-center">
+                        <div class="flex flex-col md:flex-row justify-center items-center">
                             <div @click="toggleFavorite(advice.id)"
                                 class="md:hover:bg-yellow-100 md:hover:rounded-xl cursor-pointer">
                                 <div v-if="this.favorites.includes(advice.id)" class="w-6 m-2 fill-gray-500">
