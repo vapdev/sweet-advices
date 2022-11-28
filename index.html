@@ -13,16 +13,16 @@
     <div v-cloak id="app" class="flex flex-col w-full">
         <div class="blur-div">
             <div class="flex justify-center">
-                <div @click="generateAdvice()" class="my-4 mx-2 p-3 rounded-xl border-4 hover:bg-gray-100"
-                    :class="'border-'+button_color+'-100'">
+                <div @click="generateAdvice()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 hover:bg-gray-100"
+                    :class="'border-'+button_color+'-100' + ' ' + 'bg-'+button_color+'-100/50'">
                     <div>
-                        <p class="text-gray-600 text-xl font-medium">Get new advice!</p>
+                        <p class="text-gray-600 text-xl font-medium ">Get new advice!</p>
                     </div>
                 </div>
-                <div onclick="openNav()" class="my-4 mx-2 p-3 rounded-xl border-4 hover:bg-gray-100"
-                    :class="'border-'+button_color+'-100'">
+                <div onclick="openNav()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 hover:bg-gray-100"
+                    :class="'border-'+button_color+'-100' + ' ' + 'bg-'+button_color+'-100/50'">
                     <div>
-                        <p class="text-gray-600 text-xl font-medium">See favorites</p>
+                        <p class="text-gray-600 text-xl font-normal">See favorites</p>
                     </div>
                 </div>
             </div>
@@ -115,7 +115,6 @@
     createApp({
         data() {
             return {
-                message: 'Hello Vue!',
                 advices: [],
                 colors: ['green', 'blue', 'red', 'yellow'],
                 button_color: '',
