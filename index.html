@@ -108,12 +108,12 @@
 <script>
     function openNav() {
         document.querySelector(".blur-div").classList.add("blur-md");
-        document.getElementById("mySidebar").style.width = "50%";
+        document.getElementById("mySidebar").classList.add("active");
     }
 
     function closeNav() {
         document.querySelector(".blur-div").classList.remove("blur-md");
-        document.getElementById("mySidebar").style.width = "0";
+        document.getElementById("mySidebar").classList.remove("active");
     }
 </script>
 
@@ -213,5 +213,16 @@
         right: 25px;
         font-size: 36px;
         margin-left: 50px;
+    }
+
+    .active {
+        width: 30%;
+    }
+
+    @media only screen and (max-width: 768px) {
+    /* For mobile phones: */
+    .active {
+        width: 100%;
+    }
     }
 </style>
