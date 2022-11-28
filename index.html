@@ -13,7 +13,7 @@
     <div v-cloak id="app" class="flex flex-col w-full">
         <div class="blur-div">
             <div class="flex justify-center">
-                <div @click="generateAdvice()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 hover:bg-gray-100 cursor-pointer select-none"
+                <div @click="generateAdvice()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 md:hover:bg-gray-100 cursor-pointer select-none"
                     :class="'border-'+button_color+'-100' + ' ' + 'bg-'+button_color+'-100/50'">
                     <div>
                         <p class="text-gray-600 text-xl font-medium flex">Get new advice
@@ -23,7 +23,7 @@
                         </p>
                     </div>
                 </div>
-                <div onclick="openNav()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 bg-gradient-to-r from-red-100 via-yellow-100 to-green-100 hover:from-gray-100 hover:to-gray-100 cursor-pointer select-none"
+                <div onclick="openNav()" class="my-4 mx-2 p-3 py-2 rounded-xl border-8 bg-gradient-to-r from-red-100 via-yellow-100 to-green-100 md:hover:from-gray-100 md:hover:to-gray-100 cursor-pointer select-none"
                     :class="'border-'+button_color+'-100' + ' ' + 'bg-'+button_color+'-100/50'">
                     <div>
                         <p class="text-gray-600 text-xl font-normal flex">See favorites
@@ -64,7 +64,7 @@
                     </div>
                     <div class="flex basis-0 grow w-full justify-start">
                         <div class="flex justify-center items-center">
-                            <div @click="toggleFavorite(advice.id)" class="hover:bg-yellow-100 hover:rounded-xl cursor-pointer">
+                            <div @click="toggleFavorite(advice.id)" class="md:hover:bg-yellow-100 md:hover:rounded-xl cursor-pointer">
                                 <div v-if="this.favorites.includes(advice.id)" class="w-6 m-2 fill-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                         <path
@@ -78,7 +78,7 @@
                                     </svg>
                                 </div>
                             </div>
-                            <div @click="deleteAdvice(key)" class="hover:bg-red-200 hover:rounded-xl cursor-pointer">
+                            <div @click="deleteAdvice(key)" class="md:hover:bg-red-200 md:hover:rounded-xl cursor-pointer">
                                 <div class="w-4 m-2 fill-gray-500">
                                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
                                         <path
@@ -108,7 +108,7 @@
 <script>
     function openNav() {
         document.querySelector(".blur-div").classList.add("blur-md");
-        document.getElementById("mySidebar").style.width = "40%";
+        document.getElementById("mySidebar").style.width = "50%";
     }
 
     function closeNav() {
@@ -203,7 +203,7 @@
         transition: 0.5s;
     }
 
-    .sidebar a:hover {
+    .sidebar a:md:hover {
         color: #f1f1f1;
     }
 
