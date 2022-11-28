@@ -5,7 +5,8 @@ Get advices for your life!
 https://vapdev.github.io/sweet-advices/
 
 ## Clone the repo
-`git clone https://github.com/vapdev/sweet-advices.git`
+`git clone https://github.com/vapdev/sweet-advices.git` <br/>
+`cd sweet-advices`
 ## Install dependencies
 `npm install`
 ## Run server
