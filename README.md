@@ -1,6 +1,9 @@
 # sweet-advices
 Get advices for your life!
 
+# Try it out!
+https://vapdev.github.io/sweet-advices/
+
 ## Clone the repo
 `git clone https://github.com/vapdev/sweet-advices.git`
 ## Install dependencies
