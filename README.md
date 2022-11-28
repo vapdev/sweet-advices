@@ -9,4 +9,6 @@ Get advices for your life!
 `node app.js`
 ## Access at
 `localhost:3000`
-<hr>
+<hr/>
+
+![image](https://user-images.githubusercontent.com/88452580/204182564-d57dffce-4a8d-4264-9f12-a2bf0516ab7f.png)
